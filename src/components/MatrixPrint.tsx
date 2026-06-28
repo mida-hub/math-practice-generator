@@ -26,12 +26,12 @@ export default function MatrixPrint({ data }: MatrixPrintProps) {
       {/* 名前・日付欄 */}
       <div className="flex gap-[10mm] mb-[8mm] text-[11pt]">
         <div className="flex items-center gap-2">
-          <span>なまえ：</span>
-          <span className="inline-block w-[55mm] border-b-2 border-black" />
+          <span>日にち：</span>
+          <span className="inline-block w-[40mm] border-b-2 border-black pb-6" />
         </div>
         <div className="flex items-center gap-2">
-          <span>日にち：</span>
-          <span className="inline-block w-[40mm] border-b-2 border-black" />
+          <span>なまえ：</span>
+          <span className="inline-block w-[55mm] border-b-2 border-black pb-6" />
         </div>
       </div>
 

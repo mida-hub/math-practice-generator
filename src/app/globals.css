@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: "BIZ UDPGothic", "BIZ UDGothic", "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans", "Meiryo", "IPAexGothic", "Noto Sans JP", sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* マトリクス表のセルスタイル */
+.matrix-cell {
+  border: 1px solid #555;
+  width: 18mm;
+  height: 20mm;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 16pt;
+}
+
+.header-cell {
+  background-color: #e8f0fe;
+  font-weight: bold;
+}
+
+.answer-cell {
+  background-color: #ffffff;
+}
+
+.na-cell {
+  background-color: #f0f0f0;
+  color: #666;
+}
+
+/* 印刷用スタイル */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  html,
+  body {
+    width: 210mm;
+    height: 297mm;
+  }
+
+  .matrix-cell {
+    border: 1px solid #333;
+  }
+
+  .header-cell {
+    background-color: #d0e0f8 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .na-cell {
+    background-color: #e8e8e8 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

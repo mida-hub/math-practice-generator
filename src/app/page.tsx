@@ -22,6 +22,7 @@ export default function Home() {
   const [order, setOrder] = useState<OrderType>("sequential");
   const [rowHeaders, setRowHeaders] = useState<number[]>(SEQUENTIAL);
   const [colHeaders, setColHeaders] = useState<number[]>(SEQUENTIAL);
+  const [maxSum, setMaxSum] = useState<number>(10);
 
   const handleOrderChange = (newOrder: OrderType) => {
     setOrder(newOrder);
@@ -46,14 +47,14 @@ export default function Home() {
 
   const data =
     operation === "addition"
-      ? generateAddition(rowHeaders, colHeaders)
+      ? generateAddition(rowHeaders, colHeaders, maxSum)
       : generateSubtraction(rowHeaders, colHeaders);
 
   return (
     <main className="min-h-screen bg-gray-50 print:bg-white">
       {/* 設定パネル（印刷時は非表示） */}
       <div className="print:hidden bg-white border-b border-gray-200 shadow-sm sticky top-0 z-10">
-        <div className="max-w-4xl mx-auto px-4 py-4">
+        <div className="max-w-6xl mx-auto px-4 py-4">
           <h1 className="text-xl font-bold text-gray-800 mb-3">
             🔢 算数プリント自動生成
           </h1>
@@ -106,6 +107,19 @@ export default function Home() {
               >
                 ランダム
               </button>
+            </div>
+
+            {/* 足し算の上限 */}
+            <div className={`flex items-center gap-2 ${operation !== "addition" ? "invisible" : ""}`}>
+              <span className="text-sm font-medium text-gray-600">こたえの上限：</span>
+              <input
+                type="number"
+                min={2}
+                max={18}
+                value={maxSum}
+                onChange={(e) => setMaxSum(Math.min(18, Math.max(2, Number(e.target.value))))}
+                className="w-16 px-2 py-2 rounded-lg text-sm border border-gray-300 text-center"
+              />
             </div>
 
             {/* 問題生成ボタン */}

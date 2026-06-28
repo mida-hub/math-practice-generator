@@ -22,6 +22,7 @@ export default function Home() {
   const [order, setOrder] = useState<OrderType>("sequential");
   const [rowHeaders, setRowHeaders] = useState<number[]>(SEQUENTIAL);
   const [colHeaders, setColHeaders] = useState<number[]>(SEQUENTIAL);
+  const [maxSum, setMaxSum] = useState<number>(10);
 
   const handleOrderChange = (newOrder: OrderType) => {
     setOrder(newOrder);
@@ -46,7 +47,7 @@ export default function Home() {
 
   const data =
     operation === "addition"
-      ? generateAddition(rowHeaders, colHeaders)
+      ? generateAddition(rowHeaders, colHeaders, maxSum)
       : generateSubtraction(rowHeaders, colHeaders);
 
   return (
@@ -107,6 +108,21 @@ export default function Home() {
                 ランダム
               </button>
             </div>
+
+            {/* 足し算の上限 */}
+            {operation === "addition" && (
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-medium text-gray-600">こたえの上限：</span>
+                <input
+                  type="number"
+                  min={2}
+                  max={18}
+                  value={maxSum}
+                  onChange={(e) => setMaxSum(Math.min(18, Math.max(2, Number(e.target.value))))}
+                  className="w-16 px-2 py-2 rounded-lg text-sm border border-gray-300 text-center"
+                />
+              </div>
+            )}
 
             {/* 問題生成ボタン */}
             <button
